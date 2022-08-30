@@ -462,6 +462,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
           label = result.getTitle();
 
           float conf = result.getConfidence();
+          confidence = conf;
+
           if (conf >= 0.9f) {
             color = Color.GREEN;
 
