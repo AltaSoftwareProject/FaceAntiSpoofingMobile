@@ -143,7 +143,7 @@ public class TFLiteObjectDetectionAPIModel implements Classifier {
 
     try{
       System.out.println("TEST***********************************************************************");
-      d.model = LiteModuleLoader.load("/data/user/0/org.tensorflow.lite.examples.facemask/files/mobile_model_121.ptl");
+      d.model = LiteModuleLoader.load("/data/user/0/org.tensorflow.lite.examples.facemask/files/gpumodel_2.ptl");
       System.out.println("Loaded model *****************************************************************");
     }  catch (Exception e) {
       System.out.println(e + "************************************************************************************s");
@@ -202,27 +202,18 @@ public class TFLiteObjectDetectionAPIModel implements Classifier {
 
     float[] scores = outputTensor.getDataAsFloatArray();
 
-//    float maxScore = -Float.MAX_VALUE;
-//    int maxScoreIdx = -1;
-//    System.out.println("Co tat ca" + scores.length);
-//    for (int i = 0; i < scores.length; i++) {
-//      if (scores[i] > maxScore) {
-//        System.out.println("Gia tri cua index" + i + " la " + scores[i]);
-//        maxScore = scores[i];
-//        maxScoreIdx = i;
-//      }
-//    }
     int maxScoreIdx = 0;
     String className = "";
     float maxScore = 0;
-    if (scores[0] > 0.5){
+    System.out.println(scores[0]);
+    if (scores[0] > 0.9){
       maxScoreIdx = 0;
       className = labels[0];
       maxScore = scores[0];
     } else{
       maxScoreIdx = 1;
       className = labels[1];
-      maxScore = 1 - scores[0];
+      maxScore = scores[0];
     }
 
 

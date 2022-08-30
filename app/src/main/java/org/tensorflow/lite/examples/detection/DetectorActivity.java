@@ -141,8 +141,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     //checkWritePermission();
     try{
       System.out.println("TEST***********************************************************************");
-      System.out.println(Utils.assetFilePath(this, "mobile_model_121.ptl"));
-      Module model = LiteModuleLoader.load("/data/user/0/org.tensorflow.lite.examples.facemask/files/mobile_model_121.ptl");
+      System.out.println(Utils.assetFilePath(this, "gpumodel_2.ptl"));
+      Module model = LiteModuleLoader.load("/data/user/0/org.tensorflow.lite.examples.facemask/files/gpumodel_2.ptl");
       System.out.println("Loaded model *****************************************************************");
     }  catch (Exception e) {
       System.out.println(e + "************************************************************************************s");
@@ -459,18 +459,23 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         if (resultsAux.size() > 0) {
 
           Classifier.Recognition result = resultsAux.get(0);
+          label = result.getTitle();
 
           float conf = result.getConfidence();
-          if (conf >= 0.5f) {
+          if (conf >= 0.9f) {
+            color = Color.GREEN;
 
-            confidence = conf;
-            label = result.getTitle();
-            if (result.getId().equals("0")) {
-              color = Color.GREEN;
-            }
-            else {
+//            confidence = conf;
+//            label = result.getTitle();
+//            if (result.getId().equals("0")) {
+//              color = Color.GREEN;
+//            }
+//            else {
+//              color = Color.RED;
+//            }
+          }else{
               color = Color.RED;
-            }
+
           }
 
         }
